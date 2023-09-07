@@ -9,40 +9,48 @@ public class Player : MonoBehaviour
     [SerializeField] private float timeToShoot = 1f;
     private float timeAfterLastShoot = 0f;
 
+    public static Player Instance { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
-
+        Instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Shoot();
+        HandleMove();
+        HandleShoot();
     }
 
-    private void Move()
+    private void HandleMove()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.up * speed * Time.deltaTime;
+            Move(Vector3.up);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left * speed * Time.deltaTime;
+            Move(Vector3.left);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position += Vector3.down * speed * Time.deltaTime;
+            Move(Vector3.down);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            Move(Vector3.right);
         }
     }
 
-    private void Shoot()
+    private void Move(Vector3 direction)
+    {
+        transform.position += direction * speed * Time.deltaTime;
+        Camera.main.transform.position = transform.position + Vector3.back * 10;
+    }
+
+    private void HandleShoot()
     {
         timeAfterLastShoot += Time.deltaTime;
         if (Input.GetMouseButton(0) && timeAfterLastShoot > timeToShoot)
