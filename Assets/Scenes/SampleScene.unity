@@ -313,6 +313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1125235807194379686, guid: c1d7a53cfd077484486475628239f06d, type: 3}
+  speed: 10
+  timeToShoot: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
