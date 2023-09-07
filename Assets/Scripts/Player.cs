@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    float speed = 10f;
+    [SerializeField] private GameObject bullet;
+
+    private float speed = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            Instantiate(bullet, Utils.GetMousePosition(), Quaternion.identity);
         }
     }
 }
